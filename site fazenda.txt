@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<input id="name" />
+<label>Email</label>
+<input id="email" />
+<label>Telefone</label>
+<input id="phone" />
+<label>Tipo de Interesse</label>
+<select id="type">
+<option value="pessoa">Pessoa Física</option>
+<option value="industria">Indústria</option>
+</select>
+<label>Mensagem</label>
+<textarea id="message" rows="4"></textarea>
+<button style="margin-top:10px;background:#1e4620;color:white;padding:12px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">Enviar</button>
+</form>
+</div>
+
+
+<footer>
+© 2025 Rural Imóveis – Todos os direitos reservados
+</footer>
+
+
+<a class="whatsapp-btn" href="https://wa.me/5500000000000" target="_blank">💬</a>
+
+
+<script>
+function expressInterest(title,audience){
+document.getElementById('type').value=(audience==='industria')?'industria':'pessoa';
+document.getElementById('message').value='Tenho interesse em: '+title;
+window.location.hash='#contato';
+window.scrollTo({top:document.getElementById('contato').offsetTop-40,behavior:'smooth'});
+}
+
+
+document.getElementById('search-btn').addEventListener('click',function(){
+const type=document.getElementById('search-type').value;
+const key=document.getElementById('search-key').value.trim().toLowerCase();
+const grids=[];
+if(type==='all'||type==='fazendas')grids.push('grid-fazendas');
+if(type==='all'||type==='residenciais')grids.push('grid-residenciais');
+grids.forEach(id=>{
+const grid=document.getElementById(id);
+Array.from(grid.children).forEach(card=>{
+const text=card.innerText.toLowerCase();
+card.style.display=text.includes(key)?'flex':'none';
+});
+});
+});
+
+
+function submitContact(e){
+e.preventDefault();
+const name=document.getElementById('name').value.trim();
+const email=document.getElementById('email').value.trim();
+if(!name||!email){alert('Preencha nome e email.');return;}
+alert('Mensagem enviada! Em breve entraremos em contato.');
+document.getElementById('contactForm').reset();
+}
+</script>
+</body>
+</html>
